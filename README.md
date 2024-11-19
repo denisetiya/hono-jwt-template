@@ -63,8 +63,8 @@ npm start
 
 ### Available API Endpoints
 
-- **POST** `/auth/login`: Authenticates a user and returns access and refresh tokens.
-- **POST** `/auth/register`: Registers a new user in the system.
+- **POST** `/v1/auth/login`: Authenticates a user and returns access and refresh tokens.
+- **POST** `/v1/auth/register`: Registers a new user in the system.
 
 ## Project Structure
 
