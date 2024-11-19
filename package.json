@@ -2,6 +2,8 @@
   "name": "eco-mart-api",
   "type": "module",
   "scripts": {
+    "start": "npx prisma generate && node dist/app.js",
+    "postinstall": "npx prisma generate",
     "dev": "tsx watch src/index.ts"
   },
   "dependencies": {
