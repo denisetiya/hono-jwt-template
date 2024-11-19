@@ -19,16 +19,11 @@ model User {
   nama      String
   username  String    @unique
   email     String    @unique
-  noHp      String?   @map("noHp")
+  noHp      String?  
   password  String
-  imgUrl    String?   @map("imgUrl")
+  imgUrl    String?  
   role      String    @default("user")
   createdAt DateTime  @default(now()) @map("createdAt")
-  alamat    Alamat[]
-  saller    Saller[]
-  carts     Cart[]
-  chatsSent Chats[]   @relation("SenderChats")
-  chatsRecv Chats[]   @relation("ReceiverChats")
   token     Token[]
 }
 
@@ -39,90 +34,3 @@ model Token {
 
 }
 
-model Alamat {
-  id            String   @id @default(uuid()) @map("id")
-  idUser        String   @map("idUser")
-  district      String
-  city          String
-  province      String
-  postalCode    String
-  detailAddress String
-  user          User     @relation(fields: [idUser], references: [id], onDelete: Cascade)
-
-  @@map("alamat")
-}
-
-model Saller {
-  id           String           @id @default(uuid()) @map("id")
-  idSaller     String           @map("idSaller")
-  name_brand   String
-  deskripsi_toko String?
-  alamat       String?
-  imgUrl       String?
-  user         User             @relation(fields: [idSaller], references: [id], onDelete: Cascade)
-  products     Product[]
-  approval     ApprovalSaller[]
-
-  @@map("saller")
-}
-
-model ApprovalSaller {
-  id           String   @id @default(uuid()) @map("id")
-  idSaller     String   @map("idSaller")
-  name_brand   String
-  deskripsi_toko String?
-  alamat       String?
-  imgUrl       String?
-  disable      Boolean  @default(false)
-  saller       Saller   @relation(fields: [idSaller], references: [id], onDelete: Cascade)
-
-  @@map("approvalSaller")
-}
-
-model Cart {
-  id          String   @id @default(uuid()) @map("id")
-  namaProduct String
-  hargaProduct Decimal @map("hargaProduct")
-  imgUrl      String?
-  idSaller    String   @map("idSaller")
-  idUser      String   @map("idUser")
-  idProduct   String   @map("idProduct")
-  qty         Int      @default(1)
-  fixedPrice  Decimal
-  user        User     @relation(fields: [idUser], references: [id], onDelete: Cascade)
-
-  @@map("cart")
-}
-
-model Chats {
-  id            String   @id @default(uuid()) @map("id")
-  pengirim      String   @map("pengirim")
-  namaPengirim  String
-  imgPengirim   String?
-  penerima      String   @map("penerima")
-  namaPenerima  String
-  imgPenerima   String?
-  message       String
-  createdAt     DateTime @default(now()) @map("createdAt")
-  sender        User     @relation("SenderChats", fields: [pengirim], references: [id], onDelete: Cascade)
-  receiver      User     @relation("ReceiverChats", fields: [penerima], references: [id], onDelete: Cascade)
-
-  @@map("chats")
-}
-
-model Product {
-  id              String   @id @default(uuid()) @map("id")
-  idSaller        String   @map("idSaller")
-  nama            String
-  harga           Decimal
-  deskripsi       String?
-  deskripsiSingkat String?
-  kategori        String?
-  stok            Int
-  rekomendasi     Boolean  @default(false)
-  imgUrl          String?
-  createdAt       DateTime @default(now()) @map("createdAt")
-  saller          Saller   @relation(fields: [idSaller], references: [id], onDelete: Cascade)
-
-  @@map("products")
-}
