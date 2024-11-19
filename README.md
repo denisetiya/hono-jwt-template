@@ -9,6 +9,8 @@ A template for building a REST API using the [Hono](https://hono.dev/) framework
 - Built-in JWT authentication for secure user management.
 - Easily customizable and extendable structure.
 - Clear examples for login and registration endpoints.
+- Prisma Integration
+- Rate Limiter + IP Block Mechanism
 
 ## Installation
 
@@ -86,6 +88,7 @@ Below is a brief description of the environment variables needed:
 
 - `ACCESS_TOKEN_SECRET`: The secret key for signing access tokens.
 - `REFRESH_TOKEN_SECRET`: The secret key for signing refresh tokens.
+- `API_KEY` : the secret key for server
 
 Make sure these secrets are kept private and not exposed.
 
