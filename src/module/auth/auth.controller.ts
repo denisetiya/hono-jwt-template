@@ -14,7 +14,7 @@ auth.post('/login', async (c) => {
     try {
         const { tokenData, userData } = await handleLogin({email, password});
 
-        setCookie(c, 'access_token', tokenData.token,{
+        setCookie(c, 'access_token',"Bearer "+ tokenData.token,{
             httpOnly: true,
             secure: true,
             sameSite: 'Strict',
